@@ -12,11 +12,17 @@ Proyecto generado con .Net8 para el Backend.
 
 ## Levantar el server del api:
 
-Corriendo el comando `dotnet run` el API se desplegará en [http://localhost:5013].
+Corriendo el comando `dotnet run` el API se desplegará en:
+```
+http://localhost:5013
+```
 
 ## Levantar el UI de swagger:
 
-Levantado el server del API, swagger se encuentra en la ruta [http://localhost:5013/swagger].
+Levantado el server del API, swagger se encuentra en la ruta 
+```
+http://localhost:5013/swagger
+```
 
 ## Correr los unit tests:
 

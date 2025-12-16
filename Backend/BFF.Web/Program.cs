@@ -1,4 +1,7 @@
-using BFF.web.Middlewares;
+using BFF.Web.DTOs;
+using BFF.Web.Interfaces;
+using BFF.Web.Middlewares;
+using BFF.Web.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,9 +10,18 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-var politicaPermisosCors = "_politicaPermisosCors";
+builder.Services.AddTransient<IItemInfoService<EpisodioDto>, EpisodiosInfoService>();
+builder.Services.AddHttpClient<IItemInfoService<EpisodioDto>, EpisodiosInfoService>((sp, client) =>
+{
+    var config = sp.GetRequiredService<IConfiguration>();
+    client.BaseAddress = new Uri(config["core:rickandmortyBaseURL"]!);
+    client.DefaultRequestHeaders.Add("Accept", "application/json");
+});
+
+builder.Services.AddControllers();
 
 // Agregar el servicio CORS
+var politicaPermisosCors = "_politicaPermisosCors";
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: politicaPermisosCors,
@@ -62,6 +74,8 @@ app.MapGet("/errorHandler", () =>
 })
 .WithName("errorHandler")
 .WithOpenApi();
+
+app.MapControllers();
 
 app.Run();
 

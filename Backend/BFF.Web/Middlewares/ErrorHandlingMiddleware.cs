@@ -1,7 +1,7 @@
 using System.Net;
 using System.Text.Json;
 
-namespace BFF.web.Middlewares
+namespace BFF.Web.Middlewares
 {
     public class ErrorHandlingMiddleware
     {

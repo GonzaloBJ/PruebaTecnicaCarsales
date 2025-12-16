@@ -1,0 +1,185 @@
+/* Estilos Generales */
+.container {
+  display: flex;
+  gap: 30px;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+h2 {
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+/* Distribución de Secciones */
+.table-section {
+  flex: 3;
+}
+
+.card-section {
+  flex: 1;
+  min-width: 300px;
+}
+
+/* --- Estilos de la Tabla --- */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.data-table th, .data-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.data-table th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+  color: #333;
+  text-transform: uppercase;
+  font-size: 0.9em;
+}
+
+.data-table tr:hover {
+  background-color: #f9f9f9;
+}
+
+.data-table tr.selected {
+  background-color: #e0f7fa; /* Resaltar la fila seleccionada */
+  font-weight: bold;
+}
+
+.select-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.select-btn:hover {
+  background-color: #0056b3;
+}
+
+/* --- Estilos del Paginador --- */
+.paginator {
+  margin-top: 20px;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.paginator button {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  border-radius: 4px;
+}
+
+.paginator button:hover:not([disabled]) {
+  background-color: #f0f0f0;
+}
+
+.paginator button.active {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+.paginator button[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.paginator .info {
+  margin-left: 10px;
+  color: #666;
+  font-size: 0.9em;
+}
+
+/* --- Estilos de la Card --- */
+.card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  transition: transform 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+}
+
+.card-header h3 {
+  margin: 0;
+  font-size: 1.5em;
+  color: #333;
+}
+
+.card-header .subtitle {
+  display: block;
+  font-size: 0.9em;
+  color: #777;
+  margin-bottom: 15px;
+}
+
+.card-body p {
+  margin: 10px 0;
+  line-height: 1.6;
+}
+
+.card.placeholder {
+  text-align: center;
+  padding: 40px;
+  background-color: #f4f4f4;
+  color: #666;
+}
+
+.form-control {
+  /* Fondo y borde */
+  background-color: #f8f8f8;
+  border: 1px solid #ccc;
+  border-radius: 4px; /* Esquinas redondeadas */
+
+  /* Espaciado */
+  padding: 8px 12px;
+  margin-top: 5px;
+
+  /* Tipografía */
+  font-size: 16px;
+  color: #333;
+  width: 100%; /* Ocupa todo el ancho del contenedor */
+  box-sizing: border-box; /* Asegura que padding y border se incluyan en el ancho */
+}
+
+.form-control:focus {
+  border-color: #007bff; /* Color primario al enfocar */
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Sombra suave para destacar */
+  outline: none; /* Quita el contorno por defecto del navegador */
+  background-color: #fff;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  font-weight: bold;
+  display: block; /* Para que la etiqueta ocupe su propia línea */
+  margin-bottom: 5px;
+}
+
+/* Media Query para responsividad (diseño de una sola columna en móviles) */
+@media (max-width: 900px) {
+  .container {
+      flex-direction: column;
+  }
+}

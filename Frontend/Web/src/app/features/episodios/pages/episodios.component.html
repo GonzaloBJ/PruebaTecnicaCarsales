@@ -47,6 +47,11 @@
           </td>
         </tr>
         }
+        @if (this.episodiosService.episodiosPaginated() === null) {
+        <tr>
+          <td colspan="5" class="no-data">No se encontraron episodios.</td>
+        </tr>
+        }
       </tbody>
     </table>
 

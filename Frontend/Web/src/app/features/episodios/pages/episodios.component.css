@@ -2,7 +2,7 @@
 .container {
   display: flex;
   gap: 30px;
-  padding: 20px;
+  /* padding: 20px; */
   font-family: Arial, sans-serif;
 }
 

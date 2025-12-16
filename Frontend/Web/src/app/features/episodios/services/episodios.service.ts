@@ -12,8 +12,6 @@ import { BffHttpService } from '../../../core/http/bffHttp.service';
 })
 export class EpisodiosService {
   private readonly injector = inject(Injector);
-  // private http: HttpClient = inject(HttpClient);
-  // private readonly baseUrl: string = environment.BFFUrl;
 
   // Utilizamos un Signal para almacenar los episodios
   private _episodiosPaginated: WritableSignal<IResultPagination<IEpisodio> | null> = signal(null);
@@ -38,7 +36,6 @@ export class EpisodiosService {
       queryParams = queryParams.set('Id', filter.Id!);
 
     this.bffHttp.get<IEpisodio>('episodios/', queryParams)
-    //this.http.get<IResultPagination<IEpisodio> | string>(`${this.baseUrl}episodios/`, { params: queryParams })
       .pipe(
         // El operador finalize se ejecuta cuando el Observable termina (éxito o error)
         finalize(() => this.isLoading.set(false))
@@ -49,9 +46,14 @@ export class EpisodiosService {
           this._episodiosPaginated.set(episodios as IResultPagination<IEpisodio>);
         },
         error: (_err) => {
-          this._episodiosPaginated.set(null); // Limpiar la cesta en caso de error
-          this.isLoading.set(false);
-          return;
+          if (_err.status === HttpStatusCode.NotFound) {
+            this._episodiosPaginated.set(null); // No se encontraron episodios
+            this.isLoading.set(false);
+            return;
+          }
+          else {
+            throw _err;
+          }
         }
       });
   }

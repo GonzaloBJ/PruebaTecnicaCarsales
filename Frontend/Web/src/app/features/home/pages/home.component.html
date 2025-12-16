@@ -1,0 +1,18 @@
+<nav class="side-menu">
+  <div class="menu-header">
+    <h2>Proyecto Carsales</h2>
+  </div>
+  <ul>
+    @for (item of menuItems; track item.path) {
+      <li>
+        <a [routerLink]="item.path" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          {{ item.label }}
+        </a>
+      </li>
+    }
+  </ul>
+</nav>
+
+<div class="contenido">
+  <h3>encuentra este proyecto en</h3><a href="https://github.com/GonzaloBJ/PruebaTecnicaCarsales#readme" target="_blank">GitHub</a>
+</div>

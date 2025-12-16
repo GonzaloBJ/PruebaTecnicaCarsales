@@ -33,3 +33,4 @@ C:\Users\usuario\sandbox\PruebaTecnicaCarsales\Backend\BFF.Web\obj\Debug\net8.0\
 C:\Users\usuario\sandbox\PruebaTecnicaCarsales\Backend\BFF.Web\obj\Debug\net8.0\BFF.Web.pdb
 C:\Users\usuario\sandbox\PruebaTecnicaCarsales\Backend\BFF.Web\obj\Debug\net8.0\BFF.Web.genruntimeconfig.cache
 C:\Users\usuario\sandbox\PruebaTecnicaCarsales\Backend\BFF.Web\obj\Debug\net8.0\ref\BFF.Web.dll
+C:\Users\usuario\sandbox\PruebaTecnicaCarsales\Backend\BFF.Web\obj\Debug\net8.0\BFF.Web.sourcelink.json

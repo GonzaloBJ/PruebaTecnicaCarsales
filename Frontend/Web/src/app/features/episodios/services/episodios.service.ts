@@ -6,6 +6,7 @@ import { IResultPagination } from '../../../shared/models/ResultPagination';
 import { IEpisodio } from '../models/Episodio';
 import { IEpisodiosFilter } from '../models/EpisodiosFilter';
 import { BffHttpService } from '../../../core/http/bffHttp.service';
+import { IServiceResults } from '../../../shared/models/ServiceResult';
 
 @Injectable({
   providedIn: 'root'
@@ -35,15 +36,12 @@ export class EpisodiosService {
     if (filter && filter.Id)
       queryParams = queryParams.set('Id', filter.Id!);
 
-    this.bffHttp.get<IEpisodio>('episodios/', queryParams)
-      .pipe(
-        // El operador finalize se ejecuta cuando el Observable termina (éxito o error)
-        finalize(() => this.isLoading.set(false))
-      )
+    this.bffHttp.get<IResultPagination<IEpisodio>>('episodios/', queryParams)
+      .pipe( finalize(() => this.isLoading.set(false)) )
       .subscribe({
-        next: (episodios) => {
+        next: (episodios: IServiceResults<IResultPagination<IEpisodio>>) => {
           // Actualizar el Signal con el nuevo valor
-          this._episodiosPaginated.set(episodios as IResultPagination<IEpisodio>);
+          this._episodiosPaginated.set(episodios.data);
         },
         error: (_err) => {
           if (_err.status === HttpStatusCode.NotFound) {

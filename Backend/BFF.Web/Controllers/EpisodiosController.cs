@@ -26,12 +26,14 @@ namespace BFF.web.Controllers
             if (!result.Success)
             {
                 if (result.Code == (int)HttpStatusCode.NotFound)
-                    return NotFound(result.ErrorMessage);
+                    //return NotFound(result.ErrorMessage);
+                    return StatusCode(404, result);
 
-                return StatusCode(500, result.ErrorMessage);
+                //return StatusCode(500, result.ErrorMessage);
+                return StatusCode(500, result);
             }
 
-            return Ok(result.Data);
+            return Ok(result);
         }
     }
 }

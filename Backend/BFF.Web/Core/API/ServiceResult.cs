@@ -1,4 +1,7 @@
 
+using System.Diagnostics.CodeAnalysis;
+using System.Text.Json.Serialization;
+
 namespace BFF.Web.Core.API
 {
     public class ServiceResult<T>
@@ -6,6 +9,7 @@ namespace BFF.Web.Core.API
         public bool Success { get; set; }
         public T? Data { get; set; }
         public int Code { get; set; }
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string? ErrorMessage { get; set; }
 
         public static ServiceResult<T> Ok(T data) =>

@@ -1,6 +1,6 @@
-export interface IResultPagination<T> {
-  Success: boolean;
-  Data: T | null;
-  Code: number;
-  ErrorMessage: string | null;
+export interface IServiceResults<T> {
+  success: boolean;
+  data: T | null;
+  code: number;
+  errorMessage: string | null;
 }

@@ -16,8 +16,8 @@ namespace BFF.Web.Transformations
                 PropertyNameCaseInsensitive = true
             }));
 
-            if (episodios == null && episodios?.Count() > 0)
-                return new ResultPagination<EpisodioDto>(0, 0, 0, new List<EpisodioDto>());
+            if (episodios == null || !episodios.Any())
+                return new ResultPagination<EpisodioDto>(0, 0, 0, []);
 
             IEnumerable<EpisodioDto> episodiosDto = episodios.Select(e => new EpisodioDto
             {

@@ -58,64 +58,71 @@ El repositorio contiene dos carpetas principales:
 ```
 /
 ├── Backend/
-│   ├── BFF.Web/  <- Proyecto .NET 8
-│   └── ...
+│   └── BFF.Web/  <- Proyecto .NET 8
+│   
 └── Frontend/
-    ├── PruebaTecnicaCarsales.Client/ <- Proyecto Angular 18
-    └── ...
+    └── Web/ <- Proyecto Angular 18
 
 ```
 
-### 3. Iniciar el Backend (BFF)
+### 3. Modo edición de variables de entorno/configuraciones
+1. Para el backend:
+* El archivo `appsettings.json` y `appsettings.Development.json` contienen las variables utilizadas.
+* Se compone de una seccion y una variable, ademas de las proporcionadas por dotnet cli al momento de crear el proyecto:
+```json
+"core": {
+    "rickandmortyBaseURL": "https://rickandmortyapi.com/api/"
+  }
+```
+* **rickandmortyBaseURL**: refiere al endpoint de la api utilizada para esta demo.
+
+2. Para el frontend:
+* El archivo `environment.ts` y  `environment.development.ts` comtienen las variables utilizadas.
+* Se compone de una constante cuyo valor es un objeto que contiene una variable:
+```ts
+{
+  BFFUrl: "http://localhost:5013/api/"
+}
+```
+* **BFFUrl**: refiere al endpoint del api de nuestro backend.
+
+
+### 4. Iniciar el Backend (BFF)
 1. Navegue a la carpeta del proyecto:
 ```bash
 cd Backend/BFF.Web
-
 ```
-
 
 2. Restaure las dependencias (si es necesario):
 ```bash
 dotnet restore
-
 ```
-
 
 3. Ejecute la aplicación:
 ```bash
 dotnet run
-
 ```
-
 
 > El BFF se ejecutará por defecto en `https://localhost:5013`.
 
 
-
-### 4. Iniciar el Frontend (Cliente Angular)
+### 5. Iniciar el Frontend (Cliente Angular)
 1. Abra una nueva terminal y navegue a la carpeta del cliente:
 ```bash
 cd Frontend/Web
-
 ```
-
 
 2. Instale las dependencias:
 ```bash
 npm install
-
 ```
-
 
 3. Ejecute la aplicación en modo de desarrollo:
 ```bash
 ng serve
-
 ```
 
-
 > El cliente Angular se ejecutará por defecto en `http://localhost:4200`.
-
 
 
 Una vez que ambos servicios estén levantados, abra **`http://localhost:4200`** en su navegador para interactuar con la aplicación.

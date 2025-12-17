@@ -1,7 +1,12 @@
 using BFF.Web.DTOs;
-using BFF.Web.Interfaces;
+using BFF.Web.Filters;
+using BFF.Web.Interfaces.Integrations;
+using BFF.Web.Interfaces.Repositories;
+using BFF.Web.Interfaces.Services;
 using BFF.Web.Middlewares;
+using BFF.Web.Repositories;
 using BFF.Web.Services;
+using BFF.Web.Transformations;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,13 +15,16 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddTransient<IItemInfoService<EpisodioDto>, EpisodiosInfoService>();
-builder.Services.AddHttpClient<IItemInfoService<EpisodioDto>, EpisodiosInfoService>((sp, client) =>
+builder.Services.AddScoped<IQueryBuilder<EpisodiosFilter>, EpisodeQueryBuilder>();
+builder.Services.AddScoped<ITranformations<EpisodioDto>, EpisodeTransformations>();
+builder.Services.AddTransient<IEpisodiosRepository, EpisodiosAPIRepository>();
+builder.Services.AddHttpClient<IEpisodiosRepository, EpisodiosAPIRepository>((sp, client) =>
 {
     var config = sp.GetRequiredService<IConfiguration>();
     client.BaseAddress = new Uri(config["core:rickandmortyBaseURL"]!);
     client.DefaultRequestHeaders.Add("Accept", "application/json");
 });
+builder.Services.AddTransient<IItemInfoService<EpisodioDto>, EpisodiosInfoService>();
 
 builder.Services.AddControllers();
 

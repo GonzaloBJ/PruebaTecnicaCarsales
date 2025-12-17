@@ -15,5 +15,9 @@ namespace BFF.Web.Core.Pagination
         public int Count { get; set; }
         public IReadOnlyList<T> Data { get; set; }
 
+        public static ResultPagination<T> Empty()
+        {
+            return new ResultPagination<T>(0, 0, 0, []);
+        }
     }
 }

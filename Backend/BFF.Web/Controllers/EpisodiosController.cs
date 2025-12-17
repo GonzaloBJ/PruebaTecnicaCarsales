@@ -1,8 +1,8 @@
 using System.Net;
 using BFF.Web.Filters;
-using BFF.Web.Interfaces;
 using BFF.Web.DTOs;
 using Microsoft.AspNetCore.Mvc;
+using BFF.Web.Interfaces.Services;
 
 namespace BFF.web.Controllers
 {

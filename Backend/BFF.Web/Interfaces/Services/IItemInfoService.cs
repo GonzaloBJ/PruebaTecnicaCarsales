@@ -2,7 +2,7 @@ using BFF.Web.Filters;
 using BFF.Web.Core.API;
 using BFF.Web.Core.Pagination;
 
-namespace BFF.Web.Interfaces
+namespace BFF.Web.Interfaces.Services
 {
     public interface IItemInfoService<T> where T : class
     {

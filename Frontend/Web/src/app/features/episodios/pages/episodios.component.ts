@@ -2,9 +2,10 @@ import { CommonModule } from '@angular/common';
 import { Component, computed, effect, inject, Injector, OnInit } from '@angular/core';
 import { EpisodiosService } from '../services/episodios.service';
 import { IEpisodio } from '../models/Episodio';
-import { debounceTime, distinctUntilChanged, startWith } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, filter, startWith } from 'rxjs/operators';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { ReactiveFormsModule, FormBuilder, FormControl } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { IEpisodiosFilter } from '../models/EpisodiosFilter';
 
 
 @Component({
@@ -35,7 +36,14 @@ export class EpisodiosComponent implements OnInit {
 
   // Formulario de filtros reactivo
   filterForm = this.formBuilder.group({
-    idFilter: new FormControl<string>('', { nonNullable: true }),
+    idFilter: new FormControl<string>('', {
+      nonNullable: true,
+      validators: [Validators.pattern("^[0-9]*$")] // Solo números enteros
+    }),
+    nombreFilter: new FormControl<string>('', {
+      nonNullable: true,
+      validators: [Validators.minLength(3)] // Mínimo 3 caracteres
+    }),
   });
 
   private idFilter$ = toSignal(this.filterForm.controls.idFilter.valueChanges.pipe(
@@ -44,12 +52,26 @@ export class EpisodiosComponent implements OnInit {
     distinctUntilChanged() // Solo emite si el valor realmente cambió
   ), {initialValue: ''});
 
+  private nombreFilter$ = toSignal(this.filterForm.controls.nombreFilter.valueChanges.pipe(
+    filter(value => value.length >= 3), // Permite vacíos o mínimo 3 caracteres
+    //startWith(this.filterForm.controls.nombreFilter.value), // Emite el valor inicial
+    debounceTime(300), // Espera 300ms después de que el usuario deja de escribir
+    distinctUntilChanged() // Solo emite si el valor realmente cambió
+  ), {initialValue: ''});
+
   constructor() {
     // Efecto para actualizar el filtro de episodios cuando cambia el idFilter
     effect(() => {
       const idFilter = this.idFilter$() != '' ? Number(this.idFilter$()): null;
+      const nombreFilter = this.nombreFilter$() != '' ? this.nombreFilter$(): null;
 
-      this.episodiosService.episodiosFilter.set(idFilter ? {Id: idFilter} : {});
+      let filter: IEpisodiosFilter = {};
+      if(idFilter)
+        filter.Id = idFilter;
+      if(nombreFilter)
+        filter.Name = nombreFilter;
+
+      this.episodiosService.episodiosFilter.set(filter);
     }, {
       allowSignalWrites: true,
       injector: this.injector

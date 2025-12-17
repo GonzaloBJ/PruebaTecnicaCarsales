@@ -29,6 +29,12 @@ namespace BFF.Web.Services
                 return queryParams;
             }
 
+            if (filter.PageIndex == 1 && !string.IsNullOrEmpty(filter.Name))
+            {
+                queryParams = $"{ENDPOINT}?name={filter.Name.ToLower()}";
+                return queryParams;
+            }
+
             return queryParams;
         }
     }

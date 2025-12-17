@@ -13,6 +13,34 @@
           formControlName="idFilter"
           class="form-control"
         />
+        @let idControl = filterForm.controls.idFilter;
+        @if (idControl.invalid && (idControl.dirty || idControl.touched)) {
+          <div style="color: #d9534f; font-size: 0.8rem; font-weight: bold; margin-top: 4px;">
+            @if (idControl.hasError('pattern')) {
+              <span>&#9679; Solo se aceptan números.</span>
+            }
+          </div>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="nombreFilter">Nombre:</label>
+        <input
+          type="text"
+          id="nombreFilter"
+          name="nombreFilter"
+          placeholder="Nombre del episodio"
+          formControlName="nombreFilter"
+          class="form-control"
+        />
+        @let nombreControl = filterForm.controls.nombreFilter;
+        @if (nombreControl.invalid && (nombreControl.dirty || nombreControl.touched)) {
+          <div style="color: #F2A202; font-size: 0.8rem; font-weight: bold; margin-top: 4px;">
+            @if (nombreControl.hasError('minlength')) {
+              <span>&#9679; El nombre debe tener al menos 3 caracteres.</span>
+            }
+          </div>
+        }
       </div>
     </form>
   </div>

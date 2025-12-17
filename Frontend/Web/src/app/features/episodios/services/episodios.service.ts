@@ -7,12 +7,14 @@ import { IEpisodio } from '../models/Episodio';
 import { IEpisodiosFilter } from '../models/EpisodiosFilter';
 import { BffHttpService } from '../../../core/http/bffHttp.service';
 import { IServiceResults } from '../../../shared/models/ServiceResult';
+import { EpisodiosQueryBuilderService } from './episodiosQueryBuilder.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EpisodiosService {
   private readonly injector = inject(Injector);
+  private _queryBuilderService = inject(EpisodiosQueryBuilderService);
 
   // Utilizamos un Signal para almacenar los episodios
   private _episodiosPaginated: WritableSignal<IResultPagination<IEpisodio> | null> = signal(null);
@@ -20,21 +22,16 @@ export class EpisodiosService {
   // Signal para el estado de carga
   public isLoading: WritableSignal<boolean> = signal(false);
 
-  public episodiosFilter: WritableSignal<IEpisodiosFilter | null> = signal(null);
+  public episodiosFilter: WritableSignal<IEpisodiosFilter> = signal({});
 
   // Exponemos el estado como un Signal de solo lectura
   public readonly episodiosPaginated = this._episodiosPaginated.asReadonly();
 
   /** Realiza la llamada del BFF para los episodios usando filtros de busqueda si lo requiere*/
-  private getEpisodios(filter: IEpisodiosFilter | null = null): void {
+  private getEpisodios(filter: IEpisodiosFilter): void {
     this.isLoading.set(true); // Activar el indicador de carga
 
-    // Construye los query parameters
-    let queryParams = new HttpParams();
-    if (filter && filter.PageIndex && filter.PageIndex! > 1)
-      queryParams = queryParams.set('PageIndex', filter.PageIndex!);
-    if (filter && filter.Id)
-      queryParams = queryParams.set('Id', filter.Id!);
+    let queryParams: HttpParams = this._queryBuilderService.buildQueryParams(filter!);
 
     this.bffHttp.get<IResultPagination<IEpisodio>>('episodios/', queryParams)
       .pipe( finalize(() => this.isLoading.set(false)) )

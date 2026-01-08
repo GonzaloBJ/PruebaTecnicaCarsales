@@ -1,7 +1,15 @@
 <div class="main-container">
-  <app-home />
-
-  <div class="content-area">
-    <router-outlet />
-  </div>
+    <aside>
+        <h1>Proyecto Carsales</h1>
+        <nav>
+            @for (item of menuItems; track item.path) {
+            <a [routerLink]="item.path" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+              {{ item.label }}
+            </a>
+            }
+        </nav>
+    </aside>
+    <main>
+      <router-outlet/>
+    </main>
 </div>

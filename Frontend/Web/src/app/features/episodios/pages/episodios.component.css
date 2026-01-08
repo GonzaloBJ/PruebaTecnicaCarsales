@@ -66,6 +66,17 @@ h2 {
   background-color: #0056b3;
 }
 
+.select-btn:disabled {
+  background-color: #cccccc;
+  color: #666666;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.select-btn:disabled:hover {
+  background-color: #cccccc;
+}
+
 /* --- Estilos del Paginador --- */
 .paginator {
   margin-top: 20px;

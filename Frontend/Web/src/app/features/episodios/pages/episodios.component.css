@@ -1,54 +1,55 @@
-/* Estilos Generales */
 .container {
+  flex: 1;
+  padding: 1.5rem;
   display: flex;
-  gap: 30px;
-  /* padding: 20px; */
-  font-family: Arial, sans-serif;
+  flex-direction: column;
+  gap: 1rem;
 }
 
-h2 {
-  border-bottom: 2px solid #ccc;
-  padding-bottom: 10px;
+header h2 {
+  margin: 0;
+  font-size: 1.6rem;
   margin-bottom: 20px;
 }
 
-/* Distribución de Secciones */
+header p {
+  margin: 0.3rem 0 0;
+  color: #6b7280;
+}
+
+.episode-meta {
+  color: #6b7280;
+}
+
 .table-section {
   flex: 3;
 }
 
-.card-section {
-  flex: 1;
-  min-width: 300px;
-}
-
-/* --- Estilos de la Tabla --- */
-.data-table {
+table {
   width: 100%;
   border-collapse: collapse;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-size: 0.9rem;
 }
 
-.data-table th, .data-table td {
-  padding: 12px 15px;
+th {
   text-align: left;
-  border-bottom: 1px solid #ddd;
+  color: #6b7280;
+  font-weight: 600;
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 0.5rem;
 }
 
-.data-table th {
-  background-color: #f4f4f4;
-  font-weight: bold;
-  color: #333;
-  text-transform: uppercase;
-  font-size: 0.9em;
+td {
+  padding: 0.7rem 0;
+  border-bottom: 1px solid #e5e7eb;
 }
 
-.data-table tr:hover {
-  background-color: #f9f9f9;
+table tr:hover {
+  background: #f9fafb;
 }
 
-.data-table tr.selected {
-  background-color: #e0f7fa; /* Resaltar la fila seleccionada */
+table tr.selected {
+  background: #e0e7ff;
   font-weight: bold;
 }
 
@@ -77,7 +78,6 @@ h2 {
   background-color: #cccccc;
 }
 
-/* --- Estilos del Paginador --- */
 .paginator {
   margin-top: 20px;
   display: flex;
@@ -115,82 +115,75 @@ h2 {
   font-size: 0.9em;
 }
 
-/* --- Estilos de la Card --- */
+.layout {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 1rem;
+  flex: 1;
+}
+
+.top-row {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 1rem;
+}
+
 .card {
-  border: 1px solid #ddd;
-  border-radius: 8px;
+  background: white;
+  border-radius: 10px;
+  padding: 1rem;
+  border: 1px solid #e5e7eb;
+}
+
+.card h3 {
+  margin-top: 0;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.filter-group label {
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+.filter-group input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 0.8rem;
+  border-radius: 6px;
+  border: 1px solid #e5e7eb;
+}
+
+.filter-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.subtitle {
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
   padding: 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
-  transition: transform 0.3s;
+
+  grid-template-areas:
+    "filtros detalle"
+    "listado listado";
 }
 
-.card:hover {
-  transform: translateY(-2px);
+.card-filtros {
+  grid-area: filtros;
 }
 
-.card-header h3 {
-  margin: 0;
-  font-size: 1.5em;
-  color: #333;
+.card-detalle {
+  grid-area: detalle;
 }
 
-.card-header .subtitle {
-  display: block;
-  font-size: 0.9em;
-  color: #777;
-  margin-bottom: 15px;
-}
-
-.card-body p {
-  margin: 10px 0;
-  line-height: 1.6;
-}
-
-.card.placeholder {
-  text-align: center;
-  padding: 40px;
-  background-color: #f4f4f4;
-  color: #666;
-}
-
-.form-control {
-  /* Fondo y borde */
-  background-color: #f8f8f8;
-  border: 1px solid #ccc;
-  border-radius: 4px; /* Esquinas redondeadas */
-
-  /* Espaciado */
-  padding: 8px 12px;
-  margin-top: 5px;
-
-  /* Tipografía */
-  font-size: 16px;
-  color: #333;
-  width: 100%; /* Ocupa todo el ancho del contenedor */
-  box-sizing: border-box; /* Asegura que padding y border se incluyan en el ancho */
-}
-
-.form-control:focus {
-  border-color: #007bff; /* Color primario al enfocar */
-  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Sombra suave para destacar */
-  outline: none; /* Quita el contorno por defecto del navegador */
-  background-color: #fff;
-}
-
-.form-group {
-  margin-bottom: 15px;
-}
-
-.form-group label {
-  font-weight: bold;
-  display: block; /* Para que la etiqueta ocupe su propia línea */
-  margin-bottom: 5px;
-}
-
-/* Media Query para responsividad (diseño de una sola columna en móviles) */
-@media (max-width: 900px) {
-  .container {
-      flex-direction: column;
-  }
+.card-listado {
+  grid-area: listado;
 }

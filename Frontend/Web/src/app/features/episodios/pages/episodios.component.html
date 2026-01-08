@@ -1,15 +1,15 @@
 <div class="container">
 
   <div class="Filter-section">
-    <h2>Filtrar Episodios</h2>
+    <h2>Filtros </h2>
     <form [formGroup]="filterForm" class="filter-form">
       <div class="form-group">
-        <label for="idFilter">Id:</label>
+        <label for="idFilter">ID:</label>
         <input
           type="text"
           id="idFilter"
           name="idFilter"
-          placeholder="Id del episodio"
+          placeholder="ID"
           formControlName="idFilter"
           class="form-control"
         />
@@ -42,11 +42,16 @@
           </div>
         }
       </div>
+
+      <button [disabled]="isFilterEmpty" class="select-btn" (click)="clearFilters()">
+        Limpiar filtros
+      </button>
+
     </form>
   </div>
 
   <div class="table-section">
-    <h2>Lista de Episodios</h2>
+    <h2>Listado</h2>
 
     <table class="data-table">
       <thead>
@@ -69,7 +74,7 @@
           <td>
             <button class="select-btn" (click)="selectEpisodio(episodio)">
               {{
-                episodio === selectedEpisodio ? 'Deseleccionar' : 'Ver Detalle'
+                episodio === selectedEpisodio ? 'Deseleccionar' : '🔎'
               }}
             </button>
           </td>

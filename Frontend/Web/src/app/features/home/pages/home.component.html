@@ -1,12 +1,12 @@
 <nav class="side-menu">
   <div class="menu-header">
-    <h2>Proyecto Carsales</h2>
+    <h1>Proyecto Carsales</h1>
   </div>
   <ul>
     @for (item of menuItems; track item.path) {
       <li>
         <a [routerLink]="item.path" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-          {{ item.label }}
+          <h2>{{ item.label }}</h2>
         </a>
       </li>
     }

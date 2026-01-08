@@ -10,7 +10,7 @@ export class EpisodiosQueryBuilderService {
   public buildQueryParams(filter: IEpisodiosFilter): HttpParams {
     let queryParams = new HttpParams();
 
-    if (!filter.PageIndex && filter.PageIndex! > 1)
+    if (filter.PageIndex)
       queryParams = queryParams.set('PageIndex', filter.PageIndex!);
     if (filter.Id)
       queryParams = queryParams.set('Id', filter.Id!);

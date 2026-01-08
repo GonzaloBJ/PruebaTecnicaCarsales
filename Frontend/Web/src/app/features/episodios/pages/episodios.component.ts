@@ -114,4 +114,21 @@ export class EpisodiosComponent implements OnInit {
   get pageNumbers(): number[] {
     return Array(this.totalPages()).fill(0).map((_x, i) => i + 1);
   }
+
+  /**
+   * Crea una propiedad calculada (getter)
+   */
+  get isFilterEmpty(): boolean {
+    const { nombreFilter, idFilter } = this.filterForm.value;
+    return !nombreFilter && !idFilter;
+  }
+
+  /**
+   * Genera una busqueda sin filtros y borra los filtros ingresados.
+   */
+  clearFilters(): void {
+    this.filterForm.setValue({idFilter:'',nombreFilter:''});
+    this.episodiosService.episodiosFilter.set({});
+    this.selectedEpisodio = null; // Limpiar selección al cambiar de página
+  }
 }
